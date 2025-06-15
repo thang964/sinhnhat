@@ -1,0 +1,89 @@
+/* YouTube button specific styles */
+.music-btn {
+    position: relative;
+    padding-right: 35px !important;
+    cursor: pointer !important;
+    z-index: 100 !important;
+    pointer-events: auto !important;
+}
+
+.music-btn::after {
+    content: '\f35d';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 0.8rem;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.music-btn:hover::after {
+    transform: translateY(-50%) translateX(3px);
+    opacity: 1;
+}
+
+/* YouTube pulse animation */
+@keyframes youtube-pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+.music-btn {
+    animation: youtube-pulse 2s infinite;
+}
+
+/* Click animation */
+@keyframes button-click {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.music-btn.clicked {
+    animation: button-click 0.3s ease-out;
+}
+
+/* Add a mini YouTube icon to the tooltip */
+.youtube-tooltip {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 0, 0, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.message:hover .youtube-tooltip {
+    opacity: 1;
+    bottom: -30px;
+}
+
+.message:hover .youtube-tooltip {
+    opacity: 1;
+    bottom: -30px;
+}

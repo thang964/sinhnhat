@@ -1,0 +1,174 @@
+/* Advanced Photo Gallery Animations */
+
+/* Orbit Animation for Photo Gallery */
+@keyframes orbitGallery {
+    0% {
+        transform: translateY(0) translateX(0) rotateZ(0deg);
+    }
+    33% {
+        transform: translateY(-5px) translateX(5px) rotateZ(1deg);
+    }
+    66% {
+        transform: translateY(5px) translateX(-5px) rotateZ(-1deg);
+    }
+    100% {
+        transform: translateY(0) translateX(0) rotateZ(0deg);
+    }
+}
+
+.photo-gallery {
+    animation: orbitGallery 15s ease-in-out infinite;
+}
+
+/* Parallax Effect */
+.photo-frame {
+    transition: transform 0.4s ease-out;
+    overflow: visible;
+}
+
+.photo-frame::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 8px;
+    left: 8px;
+    background: rgba(64, 196, 255, 0.2);
+    border-radius: 10px;
+    z-index: -1;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.photo-frame:hover::after {
+    opacity: 1;
+}
+
+/* 3D Transform on Hover */
+.photo-frame:hover .photo-frame-inner {
+    transform: translateZ(20px);
+}
+
+.photo-frame.active:hover .photo-frame-inner {
+    transform: translateZ(30px);
+}
+
+/* Interactive Pulse Effect */
+@keyframes photoPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(64, 196, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(64, 196, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(64, 196, 255, 0);
+    }
+}
+
+.pulse-effect {
+    animation: photoPulse 1s forwards;
+}
+
+/* Animated Caption for Flipped Images */
+.photo-back p {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.5s ease;
+}
+
+.photo-back p:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.photo-back p:nth-child(2) {
+    transition-delay: 0.3s;
+}
+
+.photo-frame.flip .photo-back p {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Shine Effect */
+@keyframes shineEffect {
+    0% {
+        background-position: -100% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.photo-frame.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    background-size: 200% 100%;
+    z-index: 2;
+    animation: shineEffect 2s infinite linear;
+    pointer-events: none;
+}
+
+/* Floating Animation Enhancement */
+@keyframes enhancedFloat {
+    0%, 100% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-8px) translateX(3px) rotate(1deg);
+    }
+    50% {
+        transform: translateY(-12px) translateX(-2px) rotate(-1deg);
+    }
+    75% {
+        transform: translateY(-5px) translateX(-5px) rotate(0.5deg);
+    }
+}
+
+.photo-frame.active {
+    animation: enhancedFloat 6s ease-in-out infinite;
+}
+
+/* Photo Dancing Effect */
+@keyframes photoDance {
+    0%, 100% {
+        transform: rotate(0deg) scale(1);
+    }
+    10% {
+        transform: rotate(2deg) scale(1.02);
+    }
+    20% {
+        transform: rotate(-2deg) scale(1.04);
+    }
+    30% {
+        transform: rotate(1deg) scale(1.02);
+    }
+    40% {
+        transform: rotate(-1deg) scale(1);
+    }
+}
+
+.dancing {
+    animation: photoDance 1s ease forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .photo-gallery {
+        animation: orbitGallery 20s ease-in-out infinite;
+    }
+    
+    .photo-frame.active {
+        animation: enhancedFloat 5s ease-in-out infinite;
+    }
+}

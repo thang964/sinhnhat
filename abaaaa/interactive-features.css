@@ -1,0 +1,150 @@
+/* Photo Interactive Features */
+
+/* Tooltip that appears on hover */
+.photo-tooltip {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.photo-tooltip::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 0 6px 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent rgba(0, 0, 0, 0.7) transparent;
+}
+
+.photo-frame:hover .photo-tooltip {
+    opacity: 1;
+    bottom: -30px;
+}
+
+/* Click hint animation */
+.click-hint {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+.photo-frame:hover .click-hint {
+    opacity: 1;
+    animation: hintPulse 1.5s infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Double-tap indicator for mobile */
+@media (max-width: 768px) {
+    .double-tap-hint {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        width: 25px;
+        height: 25px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 5;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .double-tap-hint::before,
+    .double-tap-hint::after {
+        content: '';
+        position: absolute;
+        width: 70%;
+        height: 70%;
+        border: 2px solid #40C4FF;
+        border-radius: 50%;
+        animation: doubleTapHint 1.5s infinite;
+    }
+    
+    .double-tap-hint::after {
+        animation-delay: 0.75s;
+    }
+    
+    @keyframes doubleTapHint {
+        0% {
+            transform: scale(0.5);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1.5);
+            opacity: 0;
+        }
+    }
+    
+    .photo-frame.active .double-tap-hint {
+        opacity: 1;
+    }
+}
+
+/* Transition effect between active photos */
+.photo-frame.transitioning-out {
+    animation: transitionOut 0.5s forwards;
+}
+
+.photo-frame.transitioning-in {
+    animation: transitionIn 0.5s forwards;
+}
+
+@keyframes transitionOut {
+    0% {
+        transform: scale(1.1) translateZ(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.9) translateZ(-50px);
+        opacity: 0.7;
+    }
+}
+
+@keyframes transitionIn {
+    0% {
+        transform: scale(0.9) translateZ(-50px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1.1) translateZ(0);
+        opacity: 1;
+    }
+}
